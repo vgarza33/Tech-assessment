@@ -1,6 +1,6 @@
 import React from "react";
 
-function BookCard({ book }) {
+function BookCard({ book, isFavorite = false, handleAddToFavorites, handleRemoveFromFavorites, inFavoritesList = false }) {
     return (
       <div className="card h-100 shadow-sm">
         <div className="card-body">
@@ -19,12 +19,36 @@ function BookCard({ book }) {
           
           <div className="d-flex justify-content-between align-items-center">
             <span className="fw-bold">READ MORE</span>
-            <button 
-              className="btn btn-success rounded-circle p-0 d-flex justify-content-center align-items-center" 
-              style={{ width: '30px', height: '30px' }}
-            >
-              +
-            </button>
+            {inFavoritesList ? (
+              <button 
+                className="btn btn-danger rounded-circle p-0 d-flex justify-content-center align-items-center" 
+                style={{ width: '30px', height: '30px' }}
+                onClick={handleRemoveFromFavorites}
+                aria-label="Remove from favorites"
+              >
+                -
+              </button>
+            ) : (
+              isFavorite ? (
+                <button 
+                  className="btn btn-danger rounded-circle p-0 d-flex justify-content-center align-items-center" 
+                  style={{ width: '30px', height: '30px' }}
+                  onClick={handleRemoveFromFavorites}
+                  aria-label="Remove from favorites"
+                >
+                  -
+                </button>
+              ) : (
+                <button 
+                  className="btn btn-success rounded-circle p-0 d-flex justify-content-center align-items-center" 
+                  style={{ width: '30px', height: '30px' }}
+                  onClick={handleAddToFavorites}
+                  aria-label="Add to favorites"
+                >
+                  +
+                </button>
+              )
+            )}
           </div>
         </div>
       </div>
